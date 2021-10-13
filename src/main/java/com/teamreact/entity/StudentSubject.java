@@ -18,10 +18,10 @@ import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "subject	")
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Student implements Serializable {
+public class StudentSubject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,13 +29,6 @@ public class Student implements Serializable {
 	@NonNull
 	private int id;
 
-	@Column(name = "name" ,columnDefinition = "")
+	@Column(name = "name" ,columnDefinition = "NVARCHAR(50)")
 	private String name;
-	
-	@Column(name = "age")
-	private int age;
-	
-	@ManyToOne()
-	@JoinColumn(name = "id_class")
-	private int classId;
 }
