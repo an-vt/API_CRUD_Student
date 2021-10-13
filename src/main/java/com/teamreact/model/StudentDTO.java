@@ -1,21 +1,18 @@
 package com.teamreact.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class StudentDTO {
 	private int id;
 	private String name;
+	
+//	@JsonProperty("age")
 	private int age;
-	private int classId;
+	
+	private ClassDTO classDTO;
 	
 	public StudentDTO() {
 		super();
-	}
-		
-	public StudentDTO(int id, String name, int age, int classId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.age = age;
-		this.classId = classId;
 	}
 
 	public int getId() {
@@ -41,11 +38,12 @@ public class StudentDTO {
 		this.age = age;
 	}
 
-	public int getClassId() {
-		return classId;
+	public ClassDTO getClassDTO() {
+		return classDTO;
 	}
 
-	public void setClassId(int classId) {
-		this.classId = classId;
+	public void setClassDTO(ClassDTO classDTO) {
+		this.classDTO = classDTO;
 	}
+
 }

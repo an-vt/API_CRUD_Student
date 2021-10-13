@@ -41,9 +41,6 @@ public class SearchDTO {
 	}
 
 	public Integer getLength() {
-		if (length != null && length > MAX_200) {
-			length = MAX_200;
-		}
 		return length;
 	}
 

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,10 +17,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Data
-@Table(name = "student_subject")
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Table(name = "subject")
 public class Subject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -30,11 +26,23 @@ public class Subject implements Serializable {
 	@NonNull
 	private int id;
 
-	@ManyToMany(mappedBy = "student")
-	@Column(name = "student_id")
-	private int studentId;
-	
-	@ManyToMany(mappedBy = "subject")
-	@Column(name = "subject_id")
-	private int subjectId;
+	@Column(name = "name" ,columnDefinition = "NVARCHAR(50)")
+	private String name;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

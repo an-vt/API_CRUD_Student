@@ -15,31 +15,31 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.teamreact.dao.StudentDao;
-import com.teamreact.entity.Student;
+import com.teamreact.dao.SubjectDao;
+import com.teamreact.entity.Subject;
 import com.teamreact.model.SearchDTO;
 
-@Repository // lam viec voi csdl
-@Transactional // quan ly giao dich.
-public class StudentDaoIplm extends JPARepository<Student> implements StudentDao {
-
+@Repository 
+@Transactional
+public class SubjectDaoIplm extends JPARepository<Subject> implements SubjectDao {
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
-	public Student get(int id) {
-		return entityManager.find(Student.class, id);
+	public Subject get(int id) {
+		return entityManager.find(Subject.class, id);
 	}
 
 	@Override
-	public List<Student> search(SearchDTO searchDTO) {
+	public List<Subject> search(SearchDTO searchDTO) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Student> criteriaQuery = criteriaBuilder.createQuery(Student.class);
-		Root<Student> root = criteriaQuery.from(Student.class);
+		CriteriaQuery<Subject> criteriaQuery = criteriaBuilder.createQuery(Subject.class);
+		Root<Subject> root = criteriaQuery.from(Subject.class);
 
 		List<Predicate> predicates = new ArrayList<Predicate>();
 
-		if (searchDTO.getKeyword() != null) {
+		if (StringUtils.isNotBlank(searchDTO.getKeyword())) {
 			Predicate predicate = criteriaBuilder.like( criteriaBuilder.lower(root.get("name")),
 					"%" + searchDTO.getKeyword().toLowerCase() + "%" );
 			predicates.add(predicate);
@@ -47,8 +47,9 @@ public class StudentDaoIplm extends JPARepository<Student> implements StudentDao
 
 		criteriaQuery.where(predicates.toArray(new Predicate[] {}));
 
-		TypedQuery<Student> typedQuery = entityManager.createQuery(criteriaQuery.select(root));
+		TypedQuery<Subject> typedQuery = entityManager.createQuery(criteriaQuery.select(root));
 		if (searchDTO.getStart() != null) {
+			System.out.println("truyen start length");
 			typedQuery.setFirstResult((searchDTO.getStart()));
 			typedQuery.setMaxResults(searchDTO.getLength());
 		}
@@ -57,33 +58,28 @@ public class StudentDaoIplm extends JPARepository<Student> implements StudentDao
 
 	@Override
 	public Long countSearch(SearchDTO searchDTO) {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Student> criteriaQuery = criteriaBuilder.createQuery(Student.class);
-		Root<Student> root = criteriaQuery.from(Student.class);
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
+		Root<Subject> root = criteriaQuery.from(Subject.class);
 
+		// Constructing list of parameters
 		List<Predicate> predicates = new ArrayList<Predicate>();
-
-		if (searchDTO.getKeyword() != null) {
-			Predicate predicate = criteriaBuilder.like( criteriaBuilder.lower(root.get("name")),
-					"%" + searchDTO.getKeyword().toLowerCase() + "%" );
+		if (StringUtils.isNotBlank(searchDTO.getKeyword())) {
+			Predicate predicate = builder.like(builder.lower(root.get("name")),
+					"%" + searchDTO.getKeyword().toLowerCase() + "%");
 			predicates.add(predicate);
 		}
 
 		criteriaQuery.where(predicates.toArray(new Predicate[] {}));
-
-		TypedQuery<Student> typedQuery = entityManager.createQuery(criteriaQuery.select(root));
-		if (searchDTO.getStart() != null) {
-			typedQuery.setFirstResult((searchDTO.getStart()));
-			typedQuery.setMaxResults(searchDTO.getLength());
-		}
-		return (long) typedQuery.getResultList().size();
+		TypedQuery<Long> typedQuery = entityManager.createQuery(criteriaQuery.select(builder.count(root)));
+		return typedQuery.getSingleResult();
 	}
 
 	@Override
 	public Long countTotal(SearchDTO searchDTO) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
-		Root<Student> root = criteriaQuery.from(Student.class);
+		Root<Subject> root = criteriaQuery.from(Subject.class);
 
 		TypedQuery<Long> typedQuery = entityManager.createQuery(criteriaQuery.select(criteriaBuilder.count(root)));
 		return typedQuery.getSingleResult();

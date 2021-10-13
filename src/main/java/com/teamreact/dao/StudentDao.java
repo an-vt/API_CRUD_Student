@@ -2,20 +2,22 @@ package com.teamreact.dao;
 
 import java.util.List;
 
-import com.teamreact.entity.Result;
+import com.teamreact.entity.Student;
 import com.teamreact.model.SearchDTO;
 
 
 public interface StudentDao {
-	void add(Result result);
+	void add(Student student);
 
-	void update(Result result);
+	void update(Student student);
 
-	void delete(Result result);
+	void delete(Student student);
 
-	Result get(int id);
+	Student get(int id);
 
-	List<Result> getAll();
+	List<Student> search(SearchDTO searchDTO);
+	
+	Long countSearch(SearchDTO searchDTO);
 	
 	Long countTotal(SearchDTO searchDTO);
 }

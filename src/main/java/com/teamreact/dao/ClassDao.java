@@ -14,9 +14,11 @@ public interface ClassDao {
 
 	void delete(Class classroom);
 
-	Student get(int id);
+	Class get(int id);
 
-	List<Class> getAll();
+	List<Class> search(SearchDTO searchDTO);
+	
+	Long countSearch(SearchDTO searchDTO);
 	
 	Long countTotal(SearchDTO searchDTO);
 }

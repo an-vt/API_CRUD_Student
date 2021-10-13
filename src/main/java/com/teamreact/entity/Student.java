@@ -11,16 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @Entity
-@Data
-@Table(name = "user")
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Table(name = "student")
 public class Student implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -37,5 +35,37 @@ public class Student implements Serializable {
 	
 	@ManyToOne()
 	@JoinColumn(name = "id_class")
-	private int classId;
+	private Class classRoom;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public Class getClassRoom() {
+		return classRoom;
+	}
+
+	public void setClassRoom(Class classRoom) {
+		this.classRoom = classRoom;
+	}
 }

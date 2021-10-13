@@ -14,12 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-
-@Data
 @Entity
 @Table(name = "class")
-@NoArgsConstructor
-@RequiredArgsConstructor
 public class Class implements Serializable{
 
 	/**
@@ -34,4 +30,21 @@ public class Class implements Serializable{
 	
 	@Column(name = "name" ,columnDefinition = "NVARCHAR(50)")
 	private String name;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }
