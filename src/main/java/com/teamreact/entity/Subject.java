@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +25,13 @@ public class Subject implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NonNull
-	private int id;
+	private long id;
 
 	@Column(name = "name" ,columnDefinition = "NVARCHAR(50)")
+	@NotNull
 	private String name;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,19 +26,21 @@ public class Student implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@NonNull
-	private int id;
+	private long id;
 
-	@Column(name = "name" ,columnDefinition = "")
+	@Column(name = "name" ,columnDefinition = "NVARCHAR(50)")
+	@NotNull
 	private String name;
 	
 	@Column(name = "age")
+	@NotNull
 	private int age;
 	
 	@ManyToOne()
 	@JoinColumn(name = "id_class")
 	private Class classRoom;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

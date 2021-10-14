@@ -25,13 +25,12 @@ public class Class implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NonNull
-	private int id;
+	private long id;
 	
-	@Column(name = "name" ,columnDefinition = "NVARCHAR(50)")
+	@Column(name = "name" ,columnDefinition = "NVARCHAR(50) NOT NULL")
 	private String name;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -46,5 +45,4 @@ public class Class implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 }

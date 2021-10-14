@@ -1,20 +1,21 @@
 package com.teamreact.model;
 
+
 public class ClassDTO {
-	private int id;
+	private long id;
 	private String name;
 	
 	public ClassDTO() {
 		super();
 	}
 
-	public ClassDTO(int id, String name) {
+	public ClassDTO(long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

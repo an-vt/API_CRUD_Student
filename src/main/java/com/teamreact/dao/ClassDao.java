@@ -3,8 +3,6 @@ package com.teamreact.dao;
 import java.util.List;
 
 import com.teamreact.entity.Class;
-import com.teamreact.entity.Student;
-import com.teamreact.model.SearchDTO;
 
 
 public interface ClassDao {
