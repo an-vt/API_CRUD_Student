@@ -19,7 +19,7 @@ public class ClassDTO {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -30,6 +30,6 @@ public class ClassDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	
 }

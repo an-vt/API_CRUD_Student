@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.teamreact.model.ResponseDTO;
-import com.teamreact.model.SearchDTO;
 import com.teamreact.model.ClassDTO;
+import com.teamreact.model.ResponseDTO;
 import com.teamreact.service.ClassService;
 
 @RestController
@@ -23,35 +23,37 @@ public class ClassController {
 	@Autowired
 	private ClassService classService;
 
-	@PostMapping("/classs")
+	@PostMapping("/classes")
 	public ClassDTO add(@RequestBody ClassDTO classDTO) {
 		classService.add(classDTO);
 		return classDTO;
 	}
 
-	@PutMapping(value = "/classs/{id}")
+	@PutMapping(value = "/classes/{id}")
 	public ClassDTO update(@RequestBody ClassDTO classDTO ,@PathVariable(name = "id") int id) {
 		classDTO.setId(id);
 		classService.update(classDTO);
 		return classDTO;
 	}
 
-	@DeleteMapping(value = "/classs/{id}")
+	@DeleteMapping(value = "/classes/{id}")
 	public void delete(@PathVariable(name = "id") int id) {
 		classService.delete(id);
 	}
 
-	@GetMapping(value = "/classs/{id}")
+	@GetMapping(value = "/classes/{id}")
 	public ClassDTO get(@PathVariable(name = "id") int id) {
 		return classService.get(id);
 	}
 
-	@PostMapping(value = "/classs/search")
-	public ResponseDTO<ClassDTO> find(@RequestBody SearchDTO searchDTO) {
+	@GetMapping(value = "/classes")
+	public ResponseDTO<ClassDTO> find(@RequestParam(name = "search", required = true) String search,
+			@RequestParam(name = "page", required = true) int page,
+			@RequestParam(name = "limit", required = true) int limit) {
 		ResponseDTO<ClassDTO> responseDTO = new ResponseDTO<ClassDTO>();
-		responseDTO.setData(classService.search(searchDTO));
-		responseDTO.setRecordsFiltered(classService.countSearch(searchDTO));
-		responseDTO.setRecordsTotal(classService.countTotal(searchDTO));
+		responseDTO.setData(classService.search(search, page, limit));
+		responseDTO.setRecordsFiltered(classService.countSearch(search, page, limit));
+		responseDTO.setRecordsTotal(classService.countTotal());
 		return responseDTO;
 	}
 }

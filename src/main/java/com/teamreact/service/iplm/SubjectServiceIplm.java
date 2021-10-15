@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.teamreact.dao.SubjectDao;
 import com.teamreact.entity.Subject;
-import com.teamreact.model.SearchDTO;
 import com.teamreact.model.SubjectDTO;
 import com.teamreact.service.SubjectService;
 
@@ -41,7 +40,7 @@ public class SubjectServiceIplm implements SubjectService {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		Subject subject = subjectDao.get(id);
 		if(subject != null) {
 			subjectDao.delete(subject);
@@ -49,15 +48,15 @@ public class SubjectServiceIplm implements SubjectService {
 	}
 
 	@Override
-	public SubjectDTO get(int id) {
+	public SubjectDTO get(long id) {
 		Subject subject = subjectDao.get(id);
 		System.out.println(subject);
 		return convert(subject);
 	}
 
 	@Override
-	public List<SubjectDTO> search(SearchDTO searchDTO) {
-		List<Subject> listSubjects = subjectDao.search(searchDTO);
+	public List<SubjectDTO> search(String search, int page, int limit) {
+		List<Subject> listSubjects = subjectDao.search(search, page, limit);
 		List<SubjectDTO> listSubjectDTOs = new ArrayList<SubjectDTO>();
 		
 		
@@ -75,15 +74,15 @@ public class SubjectServiceIplm implements SubjectService {
 	}
 	
 	@Override
-	public long countSearch(SearchDTO searchDTO) {
-		long count= subjectDao.countSearch(searchDTO);
+	public long countSearch(String search, int page, int limit) {
+		long count= subjectDao.countSearch(search, page, limit);
 		return count;
 	}
 
 
 	@Override
-	public long countTotal(SearchDTO searchDTO) {
-		long count=subjectDao.countTotal(searchDTO);
+	public long countTotal() {
+		long count=subjectDao.countTotal();
 		return count;
 	}
 }

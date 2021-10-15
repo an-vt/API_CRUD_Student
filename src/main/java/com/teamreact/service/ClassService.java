@@ -3,21 +3,19 @@ package com.teamreact.service;
 import java.util.List;
 
 import com.teamreact.model.ClassDTO;
-import com.teamreact.model.SearchDTO;
-import com.teamreact.model.StudentDTO;
 
 public interface ClassService {
 	void add(ClassDTO classDTO);
 
 	void update(ClassDTO classDTO);
 
-	void delete(int id);
+	void delete(long id);
 
-	ClassDTO get(int id);
+	ClassDTO get(long id);
 
-	List<ClassDTO> search(SearchDTO searchDTO);
+	List<ClassDTO> search(String search, int page, int limit);
 	
-	long countSearch(SearchDTO searchDTO);
+	long countSearch(String search, int page, int limit);
 	
-	long countTotal(SearchDTO searchDTO);
+	long countTotal();
 }

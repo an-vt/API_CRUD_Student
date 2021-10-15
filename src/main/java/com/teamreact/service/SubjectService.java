@@ -2,9 +2,6 @@ package com.teamreact.service;
 
 import java.util.List;
 
-import com.teamreact.model.ClassDTO;
-import com.teamreact.model.SearchDTO;
-import com.teamreact.model.StudentDTO;
 import com.teamreact.model.SubjectDTO;
 
 public interface SubjectService {
@@ -12,13 +9,13 @@ public interface SubjectService {
 
 	void update(SubjectDTO subjectDTO);
 
-	void delete(int id);
+	void delete(long id);
 
-	SubjectDTO get(int id);
+	SubjectDTO get(long id);
 
-	List<SubjectDTO> search(SearchDTO searchDTO);
+	List<SubjectDTO> search(String search, int page, int limit);
 	
-	long countSearch(SearchDTO searchDTO);
+	long countSearch(String search, int page, int limit);
 	
-	long countTotal(SearchDTO searchDTO);
+	long countTotal();
 }

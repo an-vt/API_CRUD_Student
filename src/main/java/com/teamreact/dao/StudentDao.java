@@ -3,7 +3,6 @@ package com.teamreact.dao;
 import java.util.List;
 
 import com.teamreact.entity.Student;
-import com.teamreact.model.SearchDTO;
 
 
 public interface StudentDao {
@@ -13,11 +12,11 @@ public interface StudentDao {
 
 	void delete(Student student);
 
-	Student get(int id);
+	Student get(long id);
 
-	List<Student> search(SearchDTO searchDTO);
+	List<Student> search(String search, int page, int limit);
 	
-	Long countSearch(SearchDTO searchDTO);
+	Long countSearch(String search, int page, int limit);
 	
-	Long countTotal(SearchDTO searchDTO);
+	Long countTotal();
 }

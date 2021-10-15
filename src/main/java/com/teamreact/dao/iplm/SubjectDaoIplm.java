@@ -11,13 +11,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.teamreact.dao.SubjectDao;
 import com.teamreact.entity.Subject;
-import com.teamreact.model.SearchDTO;
 
 @Repository 
 @Transactional
@@ -27,56 +25,58 @@ public class SubjectDaoIplm extends JPARepository<Subject> implements SubjectDao
 	private EntityManager entityManager;
 
 	@Override
-	public Subject get(int id) {
+	public Subject get(long id) {
 		return entityManager.find(Subject.class, id);
 	}
 
 	@Override
-	public List<Subject> search(SearchDTO searchDTO) {
+	public List<Subject> search(String search, int page, int limit) {
+		if(page < 0) page = 0;
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Subject> criteriaQuery = criteriaBuilder.createQuery(Subject.class);
 		Root<Subject> root = criteriaQuery.from(Subject.class);
 
 		List<Predicate> predicates = new ArrayList<Predicate>();
 
-		if (StringUtils.isNotBlank(searchDTO.getKeyword())) {
+		if (search != null) {
 			Predicate predicate = criteriaBuilder.like( criteriaBuilder.lower(root.get("name")),
-					"%" + searchDTO.getKeyword().toLowerCase() + "%" );
+					"%" + search + "%" );
 			predicates.add(predicate);
 		}
 
 		criteriaQuery.where(predicates.toArray(new Predicate[] {}));
 
 		TypedQuery<Subject> typedQuery = entityManager.createQuery(criteriaQuery.select(root));
-		if (searchDTO.getStart() != null) {
-			System.out.println("truyen start length");
-			typedQuery.setFirstResult((searchDTO.getStart()));
-			typedQuery.setMaxResults(searchDTO.getLength());
-		}
+		typedQuery.setFirstResult(page - 1);
+		typedQuery.setMaxResults(limit);
 		return typedQuery.getResultList();
 	}
 
 	@Override
-	public Long countSearch(SearchDTO searchDTO) {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
+	public Long countSearch(String search, int page, int limit) {
+		if(page < 0) page = 0;
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Subject> criteriaQuery = criteriaBuilder.createQuery(Subject.class);
 		Root<Subject> root = criteriaQuery.from(Subject.class);
 
-		// Constructing list of parameters
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		if (StringUtils.isNotBlank(searchDTO.getKeyword())) {
-			Predicate predicate = builder.like(builder.lower(root.get("name")),
-					"%" + searchDTO.getKeyword().toLowerCase() + "%");
+
+		if (search != null) {
+			Predicate predicate = criteriaBuilder.like( criteriaBuilder.lower(root.get("name")),
+					"%" + search + "%" );
 			predicates.add(predicate);
 		}
 
 		criteriaQuery.where(predicates.toArray(new Predicate[] {}));
-		TypedQuery<Long> typedQuery = entityManager.createQuery(criteriaQuery.select(builder.count(root)));
-		return typedQuery.getSingleResult();
+
+		TypedQuery<Subject> typedQuery = entityManager.createQuery(criteriaQuery.select(root));
+		typedQuery.setFirstResult(page - 1);
+		typedQuery.setMaxResults(limit);
+		return (long) typedQuery.getResultList().size();
 	}
 
 	@Override
-	public Long countTotal(SearchDTO searchDTO) {
+	public Long countTotal() {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
 		Root<Subject> root = criteriaQuery.from(Subject.class);

@@ -12,11 +12,11 @@ public interface ClassDao {
 
 	void delete(Class classroom);
 
-	Class get(int id);
+	Class get(long id);
 
-	List<Class> search(SearchDTO searchDTO);
+	List<Class> search(String search, int page, int limit);
 	
-	Long countSearch(SearchDTO searchDTO);
+	Long countSearch(String search, int page, int limit);
 	
-	Long countTotal(SearchDTO searchDTO);
+	Long countTotal();
 }

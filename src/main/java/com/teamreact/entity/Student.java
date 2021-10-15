@@ -1,9 +1,11 @@
 package com.teamreact.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,11 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "student")
@@ -25,16 +23,27 @@ public class Student implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NonNull
 	private long id;
 
-	@Column(name = "name" ,columnDefinition = "NVARCHAR(50)")
+	@Column(name = "name", columnDefinition = "NVARCHAR(50)")
 	@NotNull
 	private String name;
 	
 	@Column(name = "age")
 	@NotNull
 	private int age;
+	
+	@Column(name = "address", columnDefinition = "NVARCHAR(50)")
+	@NotNull
+	private String address;
+	
+	@Column(name = "gender", columnDefinition = "NVARCHAR(50)")
+	@NotNull
+	private String gender;
+	
+	@Column(name = "dOB", columnDefinition = "date")
+	@NotNull
+	private Date dOB;
 	
 	@ManyToOne()
 	@JoinColumn(name = "id_class")
@@ -44,7 +53,7 @@ public class Student implements Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -64,11 +73,39 @@ public class Student implements Serializable {
 		this.age = age;
 	}
 
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getdOB() {
+		return dOB;
+	}
+
+	public void setdOB(Date dOB) {
+		this.dOB = dOB;
+	}
+
 	public Class getClassRoom() {
 		return classRoom;
 	}
 
 	public void setClassRoom(Class classRoom) {
 		this.classRoom = classRoom;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

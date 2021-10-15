@@ -9,9 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.teamreact.dao.ClassDao;
 import com.teamreact.entity.Class;
-import com.teamreact.model.SearchDTO;
-import com.teamreact.service.ClassService;
 import com.teamreact.model.ClassDTO;
+import com.teamreact.service.ClassService;
 
 @Service
 @Transactional
@@ -30,18 +29,18 @@ public class ClassServiceIplm implements ClassService {
 	}
 
 	@Override
-	public void update(ClassDTO ClassDTO) {
-		Class classRoom = classDao.get(ClassDTO.getId());
+	public void update(ClassDTO classDTO) {
+		Class classRoom = classDao.get(classDTO.getId());
 		if(classRoom != null) {
-			classRoom.setId(ClassDTO.getId());
-			classRoom.setName(ClassDTO.getName());
+			classRoom.setId(classDTO.getId());
+			classRoom.setName(classDTO.getName());
 			
 			classDao.update(classRoom);
 		}
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(long id) {
 		Class classRoom = classDao.get(id);
 		if(classRoom != null) {
 			classDao.delete(classRoom);
@@ -49,15 +48,15 @@ public class ClassServiceIplm implements ClassService {
 	}
 
 	@Override
-	public ClassDTO get(int id) {
+	public ClassDTO get(long id) {
 		Class classRoom = classDao.get(id);
 		System.out.println(classRoom);
 		return convert(classRoom);
 	}
 
 	@Override
-	public List<ClassDTO> search(SearchDTO searchDTO) {
-		List<Class> listClasss = classDao.search(searchDTO);
+	public List<ClassDTO> search(String search, int page, int limit) {
+		List<Class> listClasss = classDao.search(search, page, limit);
 		List<ClassDTO> listClassDTOs = new ArrayList<ClassDTO>();
 		
 		
@@ -75,15 +74,15 @@ public class ClassServiceIplm implements ClassService {
 	}
 	
 	@Override
-	public long countSearch(SearchDTO searchDTO) {
-		long count= classDao.countSearch(searchDTO);
+	public long countSearch(String search, int page, int limit) {
+		long count= classDao.countSearch(search, page, limit);
 		return count;
 	}
 
 
 	@Override
-	public long countTotal(SearchDTO searchDTO) {
-		long count=classDao.countTotal(searchDTO);
+	public long countTotal() {
+		long count=classDao.countTotal();
 		return count;
 	}
 }

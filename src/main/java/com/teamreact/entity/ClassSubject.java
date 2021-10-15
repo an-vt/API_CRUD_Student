@@ -19,15 +19,29 @@ public class ClassSubject implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne()
-	@Column(name = "id_class")
 	@JoinColumn(name = "id_class")
 	@Id
 	private Class classRoom;
 	
 	@ManyToOne()
-	@Column(name = "id_subject")
 	@JoinColumn(name = "id_subject")
 	@Id
 	private Subject subject;
 
+	public Class getClassRoom() {
+		return classRoom;
+	}
+
+	public void setClassRoom(Class classRoom) {
+		this.classRoom = classRoom;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+	
 }

@@ -2,21 +2,20 @@ package com.teamreact.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class StudentDTO {
 	private long id;
 	private String name;
 	private int age;
 	private String address;
 	private String gender;
-	private Date dOB;
+	private String dOB;
+	private ClassDTO classDTO;
 	
 	public StudentDTO() {
 		super();
 	}
 
-	public StudentDTO(long id, String name, int age, String address, String gender, Date dOB) {
+	public StudentDTO(long id, String name, int age, String address, String gender, String dOB, ClassDTO classDTO) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -24,6 +23,7 @@ public class StudentDTO {
 		this.address = address;
 		this.gender = gender;
 		this.dOB = dOB;
+		this.classDTO = classDTO;
 	}
 
 	public long getId() {
@@ -66,11 +66,20 @@ public class StudentDTO {
 		this.gender = gender;
 	}
 
-	public Date getdOB() {
+	public String getdOB() {
 		return dOB;
 	}
 
-	public void setdOB(Date dOB) {
+	public void setdOB(String dOB) {
 		this.dOB = dOB;
 	}
+
+	public ClassDTO getClassDTO() {
+		return classDTO;
+	}
+
+	public void setClassDTO(ClassDTO classDTO) {
+		this.classDTO = classDTO;
+	}
+	
 }

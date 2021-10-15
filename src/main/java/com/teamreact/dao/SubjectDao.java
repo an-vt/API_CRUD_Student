@@ -3,7 +3,6 @@ package com.teamreact.dao;
 import java.util.List;
 
 import com.teamreact.entity.Subject;
-import com.teamreact.model.SearchDTO;
 
 
 public interface SubjectDao {
@@ -13,11 +12,11 @@ public interface SubjectDao {
 
 	void delete(Subject subject);
 
-	Subject get(int id);
+	Subject get(long id);
 
-	List<Subject> search(SearchDTO searchDTO);
+	List<Subject> search(String search, int page, int limit);
 	
-	Long countSearch(SearchDTO searchDTO);
+	Long countSearch(String search, int page, int limit);
 	
-	Long countTotal(SearchDTO searchDTO);
+	Long countTotal();
 }
