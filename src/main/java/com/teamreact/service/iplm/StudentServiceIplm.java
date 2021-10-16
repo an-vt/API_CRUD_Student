@@ -15,7 +15,6 @@ import com.teamreact.entity.Student;
 import com.teamreact.model.ClassDTO;
 import com.teamreact.model.StudentDTO;
 import com.teamreact.service.StudentService;
-import com.teamreact.untils.DateTimeUtils;
 
 @Service
 @Transactional
@@ -40,9 +39,11 @@ public class StudentServiceIplm implements StudentService {
 		
 		Class classRoom = classDao.get(studentDTO.getClassDTO().getId());	
 		student.setClassRoom(classRoom);
+		ClassDTO classDTO = new ClassDTO(classRoom.getId(), classRoom.getName());
+		studentDTO.setClassDTO(classDTO);
 		
 		studentDao.add(student);
-		studentDTO.setId(student.getId());                     
+		studentDTO.setId(student.getId());   
 	}
 
 	@Override
@@ -59,7 +60,8 @@ public class StudentServiceIplm implements StudentService {
 			
 			Class classRoom = classDao.get(studentDTO.getClassDTO().getId());	
 			student.setClassRoom(classRoom);
-			
+			ClassDTO classDTO = new ClassDTO(classRoom.getId(), classRoom.getName());
+			studentDTO.setClassDTO(classDTO);
 			studentDao.update(student);
 		}
 	}
@@ -109,7 +111,7 @@ public class StudentServiceIplm implements StudentService {
 		studentDTO.setName(student.getName());
 		studentDTO.setAge(student.getAge());
 		studentDTO.setAddress(student.getAddress());
-		studentDTO.setdOB(student.toString());
+		studentDTO.setdOB(student.getdOB().toString());
 		studentDTO.setGender(student.getGender());
 		
 		Class classRoom = classDao.get(student.getClassRoom().getId());

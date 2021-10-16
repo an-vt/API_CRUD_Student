@@ -1,19 +1,15 @@
 package com.teamreact.service;
 
+import java.util.List;
+
 import com.teamreact.model.ClassSubjectDTO;
 
 public interface ClassSubjectService {
 	void add(ClassSubjectDTO classSubjectDTO);
 
-//	void update(ClassSubjectDTO classDTO);
-//
-//	void delete(int id);
+	List<ClassSubjectDTO> findByClassId(long classId, int page, int limit);
 
-//	ClassSubjectDTO get(int id);
-
-//	List<ClassDTO> search(String search, int page, int limit);
-//	
-//	long countSearch(String search, int page, int limit);
-//	
-//	long countTotal();
+	Long countSearch(long classId, int page, int limit);
+	
+	Long countTotal();
 }

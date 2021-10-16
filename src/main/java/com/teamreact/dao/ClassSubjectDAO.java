@@ -1,5 +1,7 @@
 package com.teamreact.dao;
 
+import java.util.List;
+
 import com.teamreact.entity.ClassSubject;;
 
 
@@ -12,9 +14,9 @@ public interface ClassSubjectDAO {
 
 //	ClassSubject get(int id);
 
-//	List<ClassSubject> search(String search, int page, int limit);
+	List<ClassSubject> findByClassid(long classId, int page, int limit);
 //	
-//	Long countSearch(String search, int page, int limit);
+	Long countFindByClassId(long classId, int page, int limit);
 //	
-//	Long countTotal();
+	Long countTotal();
 }

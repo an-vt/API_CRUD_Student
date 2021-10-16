@@ -1,35 +1,28 @@
 package com.teamreact.model;
 
 public class ResultDTO {
-	private long studentId;
-	private long subjectId;
+	private StudentDTO studentDTO;
+	private SubjectDTO subjectDTO;
 	private float point;
 	
 	public ResultDTO() {
 		super();
 	}
 
-	public ResultDTO(long studentId, long subjectId, float point) {
-		super();
-		this.studentId = studentId;
-		this.subjectId = subjectId;
-		this.point = point;
+	public StudentDTO getStudentDTO() {
+		return studentDTO;
 	}
 
-	public long getStudentId() {
-		return studentId;
+	public void setStudentDTO(StudentDTO studentDTO) {
+		this.studentDTO = studentDTO;
 	}
 
-	public void setStudentId(long studentId) {
-		this.studentId = studentId;
+	public SubjectDTO getSubjectDTO() {
+		return subjectDTO;
 	}
 
-	public long getSubjectId() {
-		return subjectId;
-	}
-
-	public void setSubjectId(long subjectId) {
-		this.subjectId = subjectId;
+	public void setSubjectDTO(SubjectDTO subjectDTO) {
+		this.subjectDTO = subjectDTO;
 	}
 
 	public float getPoint() {

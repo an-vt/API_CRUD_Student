@@ -17,7 +17,6 @@ import com.teamreact.model.ResponseDTO;
 import com.teamreact.model.StudentDTO;
 import com.teamreact.service.ClassService;
 import com.teamreact.service.StudentService;
-import com.teamreact.untils.DateTimeUtils;
 
 @RestController
 @RequestMapping("/api")
@@ -38,7 +37,7 @@ public class StudentController {
 	}
 
 	@PutMapping(value = "/students/{id}")
-	public StudentDTO update(@ModelAttribute StudentDTO studentDTO) {
+	public StudentDTO update(@RequestBody StudentDTO studentDTO) {
 		System.out.println(studentDTO.getdOB()+studentDTO.getId());
 		studentService.update(studentDTO);
 		return studentDTO;

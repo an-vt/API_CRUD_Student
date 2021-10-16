@@ -1,32 +1,32 @@
 package com.teamreact.model;
 
 public class ClassSubjectDTO {
-	private long classId;
-	private long subjectId;
+	private ClassDTO classDTO;
+	private SubjectDTO subjectDTO;
 	
 	public ClassSubjectDTO() {
 		super();
 	}
-	
-	public ClassSubjectDTO(long classId, long subjectId) {
+
+	public ClassSubjectDTO(ClassDTO classDTO, SubjectDTO subjectDTO) {
 		super();
-		this.classId = classId;
-		this.subjectId = subjectId;
+		this.classDTO = classDTO;
+		this.subjectDTO = subjectDTO;
 	}
 
-	public long getClassId() {
-		return classId;
+	public ClassDTO getClassDTO() {
+		return classDTO;
 	}
-	
-	public void setClassId(long classId) {
-		this.classId = classId;
+
+	public void setClassDTO(ClassDTO classDTO) {
+		this.classDTO = classDTO;
 	}
-	
-	public long getSubjectId() {
-		return subjectId;
+
+	public SubjectDTO getSubjectDTO() {
+		return subjectDTO;
 	}
-	
-	public void setSubjectId(long subjectId) {
-		this.subjectId = subjectId;
+
+	public void setSubjectDTO(SubjectDTO subjectDTO) {
+		this.subjectDTO = subjectDTO;
 	}
 }

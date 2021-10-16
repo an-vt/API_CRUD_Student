@@ -1,5 +1,7 @@
 package com.teamreact.service;
 
+import java.util.List;
+
 import com.teamreact.model.ResultDTO;
 
 public interface ResultService {
@@ -11,9 +13,9 @@ public interface ResultService {
 
 //	ClassSubjectDTO get(int id);
 
-//	List<ClassDTO> search(String search, int page, int limit);
+	List<ResultDTO> findByStudentId(long studentId, int page, int limit);
 //	
-//	long countSearch(String search, int page, int limit);
-//	
-//	long countTotal();
+	Long countFindByStudentId(long studentId, int page, int limit);
+	
+	Long countTotal();
 }
